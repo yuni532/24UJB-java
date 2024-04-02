@@ -11,7 +11,7 @@ public class Operator4Example {
 				System.out.println("x : " + x );
 				System.out.println("x : " + x );
 			
-				int z = ++x + y++;
+				int z = ++x + y++ + 3;
 				System.out.println("x : " + x );
 				System.out.println("y : " + y );
 				System.out.println("z : " + z );

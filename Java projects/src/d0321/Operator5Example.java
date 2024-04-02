@@ -8,13 +8,10 @@ public class Operator5Example {
 		System.out.println(bPlay); // true
 
 		bPlay = !bPlay;
-		System.out.println(bPlay); // true 반대 false
+		System.out.println(bPlay); // ㅂ
 		
 		bPlay = !bPlay;
-		System.out.println(bPlay); // true 반대 false 반대 true
-		
-		bPlay = !bPlay;
-		System.out.println(bPlay); //  true 반대 false 반대 true 반대 false
+		System.out.println(bPlay);
 	}
 
 }
