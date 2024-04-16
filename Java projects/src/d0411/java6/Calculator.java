@@ -1,178 +1,150 @@
 package d0411.java6;
-import java.awt.Frame;
+
+import java.awt.BorderLayout;
 import java.awt.Button;
-import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Panel;
-import java.awt.BorderLayout;
 
-
-class Calculator {
+public class Calculator implements ActionListener {
 	private Frame f;
 	private TextField tf;
-	private Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16,b17;
-	private Panel p ;
-	
+	private Panel p;
+
+	private Button[] btnNum;
+
+	private Button bPlus, bMinus, bMul, bDiv, bRes;
+	private int operand = 0;
+
+	private enum OP {
+		OP_NULL, OP_PLUS, OP_MINUS, OP_MUL, OP_DIV
+	};
+
+	private OP op = OP.OP_NULL;
+	private OP opOne = OP.OP_NULL;
+
 	public Calculator() {
-		f= new Frame ("Calculator");
-		f.setLayout(new FlowLayout());
+		f = new Frame("Calculator!");
+		f.setSize(400, 300);
+		f.setLocation(50, 50);
+
 		tf = new TextField("0");
-		
 
-		
-		
-		
-		
-		
-	//TextField Total = new TextField(100);
 		p = new Panel();
-	b1= new Button("0");
-	b2= new Button("1");
-	b3= new Button("2");
-	b4= new Button("3");
-	b5= new Button("4");
-	b6= new Button("5");
-	b7= new Button("6");
-	b8= new Button("7");
-	b9= new Button("8");
-	b10= new Button("9");
-	b11= new Button("+");
-	b12= new Button("-");
-	b13= new Button("=");
-	b14= new Button("*");
-	b15= new Button("%");
-	b16= new Button("Delete");
-	b17= new Button("Clear");
+		p.setLayout(new GridLayout(4, 0));
+
+		btnNum = new Button[10];
+		
+		for (int i = 0; i < btnNum.length; i++) {
+			String num = String.valueOf(i);
+			btnNum[i] = new Button(num);
+		}
+
+
+		for (int i = 0; i < btnNum.length; i++) {
+			btnNum[i].addActionListener(this);
+		}
+
+		bPlus = new Button("+");
+		bMinus = new Button("-");
+		bMul = new Button("*");
+		bDiv = new Button("/");
+		bRes = new Button("=");
+
+		bPlus.addActionListener(this);
+		bMinus.addActionListener(this);
+		bMul.addActionListener(this);
+		bDiv.addActionListener(this);
+		bRes.addActionListener(this);
+		
+		for (int i = 0; i < btnNum.length; i++) {
+			p.add(btnNum[i]);
+		}
+
+		p.add(bPlus);
+		p.add(bMinus);
+		p.add(bMul);
+		p.add(bDiv);
+		p.add(bRes);
+
+		f.add(tf, BorderLayout.NORTH);
+		f.add(p, BorderLayout.CENTER);
+
+		f.setVisible(true);
 	}
 
-public void startFrame() {
-	
-	tf = new TextField(" ");
-	
-	b1.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			System.out.print("0");
-		}
-	});
-	b2.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("1");
-		}
-	});
-	b3.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("2");
-		}
-	});
-	b4.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("3");
-		}
-	});
-	b5.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("4");
-		}
-	});
-	b6.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("5");
-		}
-	});
-	b7.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("6");
-		}
-	});
-	b8.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("7");
-		}
-	});
-	b9.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("8");
-		}
-	});
-	b10.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("9");
-		}
-	});
-	b11.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("+");
-		}
-	});
-	b12.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("-");
-		}
-	});
-	b13.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("=");
-		}
-	});
-	b14.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("*");
-		}
-	});
-	b15.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("%");
-		}
-	});
-	b16.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("Delete");
-		}
-	});
-	b17.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			tf.setText("     ");
-		}
-	});
-	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("112 : " + e.getActionCommand());
+		
+		String tfText = tf.getText();
 
-	
-	f.add(tf,BorderLayout.NORTH);
-	
-	
-	f.add(b1,BorderLayout.SOUTH);
-	f.add(b2,"West");
-	f.add(b3,"South");
-	f.add(b4);
-	f.add(b5);
-	f.add(b6);
-	f.add(b7);
-	f.add(b8);
-	f.add(b9);
-	f.add(b10);
-	f.add(b11);
-	f.add(b12);
-	f.add(b13);
-	f.add(b14);
-	f.add(b15);
-	f.add(b16);
-	f.add(b17);
-	f.setSize(300,370);
-	f.setVisible(true);
-	
+		if (e.getActionCommand().equals("0")) {
+			System.out.println("0");
+
+			if (tfText.equals("0")) {
+
+			} else {
+				tfText += "0";
+				tf.setText(tfText);
+			}
+		}
+
+		for (int i = 1; i < btnNum.length; i++) {
+			if (e.getActionCommand().equals(String.valueOf(i))) {
+				System.out.println(i);
+
+				if (op == OP.OP_NULL) {
+					if (tfText.equals("0") && (op == OP.OP_NULL)) {
+						tf.setText(String.valueOf(i));
+					} else {
+						tfText += String.valueOf(i);
+						tf.setText(tfText);
+					}
+				} else {
+					tf.setText(String.valueOf(i));
+					op = OP.OP_NULL;
+				}
+			}
+		}
+
+
+		if (e.getActionCommand().equals("+")) {
+			System.out.println("+");
+
+			op = OP.OP_PLUS;
+			opOne = OP.OP_PLUS;
+			operand = Integer.parseInt(tf.getText());
+			System.out.println(operand);
+		}
+		if (e.getActionCommand().equals("-")) {
+			System.out.println("-");
+		}
+		if (e.getActionCommand().equals("*")) {
+			System.out.println("*");
+		}
+		if (e.getActionCommand().equals("/")) {
+			System.out.println("/");
+		}
+		if (e.getActionCommand().equals("=")) {
+			System.out.println("=");
+
+			System.out.println(operand);
+			System.out.println(opOne);
+			System.out.println(tf.getText());
+
+			int result = 0;
+			if (opOne == OP.OP_PLUS) {
+				result = operand + Integer.parseInt(tf.getText());
+			}
+			tf.setText(String.valueOf(result));
+		}
 	}
-	
-	
-	
 
-	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	     Calculator flow  = new Calculator();
-	     flow.startFrame();
-	
+		new AWTCalc();
 	}
-
 }
